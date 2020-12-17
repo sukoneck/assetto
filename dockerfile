@@ -31,15 +31,12 @@ RUN set -x \
     && ./steamcmd.sh +login $STEAM_USERNAME $STEAM_PASSWORD +@sSteamCmdForcePlatformType windows +force_install_dir ./assetto +app_update 302550 validate +quit \
     # configure assetto server
     && cd /home/steam/assetto/cfg \
-    && wget ...server_cfg.ini \
-    && wget ...entry_list.ini \
-    && cd /home/steam \
+    && rm -f ./* \
+    && wget $ASSETTO_SERVER_CFG \
+    && wget $ASSETTO_ENTRY_LIST \
+    && chmod -R 755 /home/steam/ \
+    && cd ..
     # configure stracker? depends on zlib1g:i386
-    # ???
-    # start the server
-    && ./acServer start
 
-
-
-
+CMD ["./acServer","start"]
 
