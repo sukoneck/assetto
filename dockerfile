@@ -25,6 +25,7 @@ RUN set -x \
 
 # pull in the entrypoint script and assetto corsa cfg files 
 COPY files/ /home/steam/files/
+RUN chmod -R 755 /home/steam/
 
 # end by kicking off a script because steam and assetto are chonk and "container images should be small"
 ENTRYPOINT [ "/home/steam/files/entry.sh" ]
