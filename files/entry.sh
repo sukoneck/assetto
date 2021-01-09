@@ -24,6 +24,8 @@ install_assetto() {
 config_assetto() {
   echo ">>> Configuring assetto using cfg files"
     cp /home/steam/files/* /home/steam/assetto/cfg/
+    rm -rf /home/steam/assetto/content
+    ln -s /mnt/content /home/steam/assetto/content
     chmod -R 755 /home/steam/
 }
 
