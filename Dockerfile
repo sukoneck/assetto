@@ -6,6 +6,7 @@ LABEL maintainer="daniel@sukoneck.com"
 # these are used by entry.sh to login to steam via steamcmd
 ENV STEAM_USERNAME=
 ENV STEAM_PASSWORD=
+ENV ASSETTO_CFG=
 
 # get dependencies for steamcmd and assetto corsa then clean yourself up
 RUN set -x \
@@ -24,7 +25,7 @@ RUN set -x \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # pull in the entrypoint script and assetto corsa cfg files 
-COPY files/ /home/steam/files/
+COPY entry.sh /home/steam/files/
 RUN chmod -R 755 /home/steam/
 
 # end by kicking off a script because steam and assetto are chonk and "container images should be small"
