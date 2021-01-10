@@ -20,7 +20,7 @@ Dockerfile and entry script for an Assetto Corsa server running in a Debian cont
 ## Mobilize the armada
 
 1. On the container host (assumes VM) add the cron task described in startup.sh
-2. Populate the variable values in startup.sh  
+2. Populate the variable values in startup.sh and make sure the PORT_PREFIX matches your server_cfg.ini files
 3. Restart your container host
 4. Overtake your opponent using the gutter technique during the five hairpin turns on the Akina downhill (obviously)
 

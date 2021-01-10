@@ -5,7 +5,7 @@ set -e
 
 set_variables() {
   echo ">>> Setting environment variables"
-  MOUNT_PATH=$MOUNT_PATH_DEST
+  MOUNT_PATH=${MOUNT_PATH_DEST}
   STEAM_APP_ID=302550
   STEAM_PATH=/home/steam
   STEAMCMD_DOWNLOAD=https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz

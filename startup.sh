@@ -12,8 +12,8 @@ set_variables() {
   CONTAINER_IMAGE=    # Assetto server container image
   MOUNT_PATH_DEST=    # Path that will exist in the containers
   MOUNT_PATH_SOURCE=  # Path that exists on the host. If using Azure files: /<directory>/${AZURE_FILE_NAME}
-  PORT_PREFIX_HTTP=   # Assetto HTTP port when combined with server count  
-  PORT_PREFIX_TCPUD=  # Assetto TCP/UPD port when combined with server count
+  PORT_PREFIX_HTTP=   # First two digits of Assetto HTTP port. Gets combined with SERVER_COUNT below. Must match your server_cfg.ini
+  PORT_PREFIX_TCPUD=  # First two digits of Assetto TCP/UPD port. Gets combined with SERVER_COUNT below. Must match your server_cfg.ini
   STEAM_PASSWORD=     # Steam host password
   STEAM_USERNAME=     # Steam host username
 }
