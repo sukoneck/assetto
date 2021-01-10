@@ -7,6 +7,7 @@ LABEL maintainer="daniel@sukoneck.com"
 ENV STEAM_USERNAME=
 ENV STEAM_PASSWORD=
 ENV ASSETTO_CFG=
+ENV MOUNT_PATH_DEST=
 
 # get dependencies for steamcmd and assetto corsa then clean yourself up
 RUN set -x \
