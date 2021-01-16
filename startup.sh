@@ -96,6 +96,7 @@ run_container() {
 set_variables
 chill_out
 validate_docker
+apt-gets
 if [ ${AZURE_FILE_USED} = true ]; then
   validate_storage_prerequisites
   mount_storage
