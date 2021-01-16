@@ -34,17 +34,23 @@ validate_docker() {
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
     usermod -aG docker ${OS_USERNAME}
-    apt update 
-    apt upgrade -y
   else
     echo ">>> Docker is ready to roll"
   fi
 }
 
+# Keep it fresh
+apt-gets() {
+  echo ">>> Checking for updates to git, cifs-utils, and docker"
+    apt-get upgrade -y git
+    apt-get upgrade -y cifs-utils
+    apt-get update 
+    apt-get upgrade -y
+}
+
 # Check path and creds exist before attempting to mount Azure files storage. You still need to run the initial config script from Azure first
 validate_storage_prerequisites() {
   echo ">>> Validating storage pre-requisites are met"
-  apt-get upgrade -y cifs-utils
   # Make sure the mount destination on the host exists
   if [ ! -d "${MOUNT_PATH_SOURCE}" ]; then
     echo ">>> ERROR: destination directory on host for mounting Azure file storage is missing. Fixing it, but that's wack."
