@@ -44,6 +44,7 @@ start_assetto() {
   ${STEAM_PATH}/assetto/acServer start
 }
 
+set_variables
 install_steamcmd
 install_assetto
 config_assetto
