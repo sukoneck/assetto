@@ -30,22 +30,22 @@ chill_out() {
 # Install docker if it's not already there
 validate_docker() {
   if [ -x "$(command -v docker)" ]; then
+    echo ">>> Docker is ready to roll"
+  else
     echo ">>> Installing docker"
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
     usermod -aG docker ${OS_USERNAME}
-  else
-    echo ">>> Docker is ready to roll"
   fi
 }
 
 # Keep it fresh
-apt-gets() {
+update_packages() {
   echo ">>> Checking for updates to git, cifs-utils, and docker"
-    apt-get upgrade -y git
-    apt-get upgrade -y cifs-utils
-    apt-get update 
-    apt-get upgrade -y
+    apt-get upgrade -y -qq git
+    apt-get upgrade -y -qq cifs-utils
+    apt-get update -qq
+    apt-get upgrade -y -qq
 }
 
 # Check path and creds exist before attempting to mount Azure files storage. You still need to run the initial config script from Azure first
@@ -72,7 +72,7 @@ mount_storage() {
 # Pull the latest image from docker hub
 pull_container_image() {
   echo ">>> Getting the latest container image for ${CONTAINER_IMAGE}"
-  docker pull ${CONTAINER_IMAGE}
+  docker pull ${CONTAINER_IMAGE} -q
 }
 
 # Go on, get
@@ -82,7 +82,7 @@ run_container() {
     -v ${MOUNT_PATH_SOURCE}/content:${MOUNT_PATH_DEST}/content \
     -v ${MOUNT_PATH_SOURCE}/cfg:${MOUNT_PATH_DEST}/cfg \
     -e ASSETTO_CFG=${ASSETTO_PRESET} \
-    -e MOUNT_PATH_DEST=${MOUNT_PATH_DEST}
+    -e MOUNT_PATH_DEST=${MOUNT_PATH_DEST} \
     -e STEAM_USERNAME=${STEAM_USERNAME} \
     -e STEAM_PASSWORD=${STEAM_PASSWORD} \
     -p ${PORT_TCPUDP}:${PORT_TCPUDP}/tcp \
@@ -96,7 +96,7 @@ run_container() {
 set_variables
 chill_out
 validate_docker
-apt-gets
+update_packages
 if [ ${AZURE_FILE_USED} = true ]; then
   validate_storage_prerequisites
   mount_storage
