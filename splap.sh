@@ -8,10 +8,10 @@ set -e
 set_variables() {
   echo ">>> Setting environment variables"
   ASSETTO_PRESET=$1   # Two digit number that matches your (e.g.) ../Assetto/Server/Presets/SERVER_00 folder
+  CONTAINER_IMAGE=    # Assetto server container image. You want this one "sukoneck/assetto:latest"
   KEEP_IT_CLEAN=$2    # Should existing containers get cleaned up?
   PORT_HTTP=8081      # Assetto HTTP port. Must match your server_cfg.ini
   PORT_TCPUDP=9600    # Assetto TCP/UPD port. Must match your server_cfg.ini
-  CONTAINER_IMAGE=    # Assetto server container image. You want this one "sukoneck/assetto:latest"
   MOUNT_PATH_DEST=    # Path that will exist in the containers e.g. /mnt/assetto
   MOUNT_PATH_SOURCE=  # Path that exists on the host e.g. /mnt/c/programfiles/Assetto/Server
   STEAM_PASSWORD=     # Steam host password
@@ -41,7 +41,6 @@ run_container() {
   docker run -d \
     -v ${MOUNT_PATH_SOURCE}/content:${MOUNT_PATH_DEST}/content \
     -v ${MOUNT_PATH_SOURCE}/Presets/SERVER_${ASSETTO_PRESET}:${MOUNT_PATH_DEST}/cfg \
-    -e ASSETTO_CFG=${ASSETTO_PRESET} \
     -e MOUNT_PATH_DEST=${MOUNT_PATH_DEST} \
     -e STEAM_USERNAME=${STEAM_USERNAME} \
     -e STEAM_PASSWORD=${STEAM_PASSWORD} \
