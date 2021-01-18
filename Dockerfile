@@ -4,10 +4,9 @@ FROM debian:buster-slim
 LABEL maintainer="daniel@sukoneck.com"
 
 # these are used by entry.sh to login to steam via steamcmd
-ENV STEAM_USERNAME=
-ENV STEAM_PASSWORD=
-ENV ASSETTO_CFG=
 ENV MOUNT_PATH_DEST=
+ENV STEAM_PASSWORD=
+ENV STEAM_USERNAME=
 
 # get dependencies for steamcmd and assetto corsa then clean yourself up
 RUN set -x \
