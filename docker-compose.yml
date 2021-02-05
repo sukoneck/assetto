@@ -1,0 +1,22 @@
+# https://github.com/sukoneck/assetto
+
+version: '3.9'
+
+services:
+
+  assetto:
+    container_name: assetto
+    environment:
+      - STEAM_USERNAME: "<username>"
+      - STEAM_PASSWORD: "<password>"
+      - ASSETTO_PRESET: "<preset>"
+    image: sukoneck/assetto:latest
+    ports:
+      - "9600:9600/tcp"
+      - "9600:9600/udp"
+      - "8081:8081/tcp" 
+      - "8081:8081/udp"
+    restart: "always" 
+    volumes:
+      - "<path>/content:/mnt/assetto/content"
+      - "<path>/presets:/mnt/assetto/presets"

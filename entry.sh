@@ -32,7 +32,7 @@ install_assetto() {
 
 config_assetto() {
   echo ">>> Configuring assetto using cfg files"
-  cp ${MOUNT_PATH}/cfg/* ${STEAM_PATH}/assetto/cfg/
+  cp ${MOUNT_PATH}/presets/SEVER_${ASSETTO_PRESET}/* ${STEAM_PATH}/assetto/cfg/
   rm -rf ${STEAM_PATH}/assetto/content
   ln -s ${MOUNT_PATH}/content ${STEAM_PATH}/assetto/content
   chmod -R 755 ${STEAM_PATH}/

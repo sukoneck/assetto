@@ -4,7 +4,8 @@ FROM debian:buster-slim
 LABEL maintainer="daniel@sukoneck.com"
 
 # these are used by entry.sh to login to steam via steamcmd
-ENV MOUNT_PATH_DEST=
+ENV ASSETTO_PRESET=
+ENV MOUNT_PATH_DEST=/mnt/assetto
 ENV STEAM_PASSWORD=
 ENV STEAM_USERNAME=
 

@@ -1,35 +1,34 @@
 # Summary
-## [Docker Hub](https://hub.docker.com/r/sukoneck/assetto)
-Dockerfile and entry script for an Assetto Corsa server running in a Debian container. Docker Hub builds `sukoneck/assetto:latest` on commit to Github `sukoneck/assetto@main`.
 
-## [Github](https://github.com/sukoneck/assetto)
-The splap script makes is easy mode for changing the Assetto server based on presets like the kind acServerManager.exe creates. Archive has a container host startup script for deploying infinite servers and seeing the matrix, but who's got the time. 
+Dockerfile and entry script for an Assetto Corsa server running in a Debian container. Docker Hub builds `sukoneck/assetto:latest` on commit to Github `sukoneck/assetto@main`. 
+
+# Links
+ - Docker Hub: https://hub.docker.com/r/sukoneck/assetto 
+ - Github: https://github.com/sukoneck/assetto
 
 # Usage
-## Run a single container ad hoc
+## Docker compose
+
+Update the following values in the docker-compose.yml file then use `docker-compose up -d`
+
+    <password> # your steam username (use a throwaway)
+    <path>     # directory on host where presets and content folders live, (e.g.) ../Assetto/Server
+    <preset>   # two digit number that matches your (e.g.) ../Assetto/Server/Presets/SERVER_00 folder that acServerManager.exe creates
+    <username> # your steam password (use a throwaway)
+
+## Run ad hoc container
 
     docker run -d \
-        -v <path>/content:<mount_path_dest>/content \  # where the "content" folder lives on the host
-        -v <path>/cfg:<mount_path_dest>/cfg \          # where the "cfg" folder lives on the host
-        -e MOUNT_PATH_DEST=<mount_path_dest> \         # same as <mount_path_dest>, e.g. /mnt/assetto
-        -e STEAM_USERNAME=<username> \                 # your steam username
-        -e STEAM_PASSWORD=<password> \                 # your steam password
-        -p 9600:9600/tcp \                             # TCPUDP port used by Assetto
-        -p 9600:9600/udp \                             # TCPUDP port used by Assetto
-        -p 8081:8081/tcp \                             # HTTP port used by Assetto
-        -p 8081:8081/udp \                             # HTTP port used by Assetto
-        sukoneck/assetto:latest                        # Container image in dockerhub
-
-## Splap out a single container 
-
-    ../splap.sh 07 clean
-
-## Mobilize the armada (archived)
-
-1. On the container host (assumes VM) add the cron job described in startup.sh
-2. Populate the variable values in startup.sh and make sure the PORT_PREFIX matches your server_cfg.ini files
-3. Restart your container host
-4. Overtake your opponent using the gutter technique during the five hairpin turns on the Akina downhill (obviously)
+        -e ASSETTO_PRESET=<preset> \              # which preset to use (see above)
+        -e STEAM_PASSWORD=<password> \            # your steam password (use a throwaway)
+        -e STEAM_USERNAME=<username> \            # your steam username (use a throwaway)
+        -p 8081:8081/tcp \                        # HTTP port used by Assetto in server_cfg.ini
+        -p 8081:8081/udp \                        # HTTP port used by Assetto in server_cfg.ini
+        -p 9600:9600/tcp \                        # TCPUDP port used by Assetto in server_cfg.ini
+        -p 9600:9600/udp \                        # TCPUDP port used by Assetto in server_cfg.ini
+        -v <path>/content:/mnt/assetto/content \  # where the "content" folder lives on the host
+        -v <path>/presets:/mnt/assetto/presets \  # where the "presets" folder lives on the host
+        sukoneck/assetto:latest                   # container image in dockerhub
 
 # References
 
