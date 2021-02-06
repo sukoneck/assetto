@@ -7,9 +7,9 @@ services:
   assetto:
     container_name: assetto
     environment:
-      - STEAM_USERNAME: "<username>"
-      - STEAM_PASSWORD: "<password>"
-      - ASSETTO_PRESET: "<preset>"
+      STEAM_USERNAME: "<username>"
+      STEAM_PASSWORD: "<password>"
+      ASSETTO_PRESET: "<preset>"
     image: sukoneck/assetto:latest
     ports:
       - "9600:9600/tcp"
